@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="TwinderServer">
+    <output-path>$PROJECT_DIR$/out/artifacts/TwinderServer</output-path>
+    <root id="archive" name="TwinderServer.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="TwinderServer" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.10.1" />
+          <element id="library" level="project" name="Maven: com.rabbitmq:amqp-client:5.18.0" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.36" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="TwinderServer/web/Web" />
+    </root>
+  </artifact>
+</component>

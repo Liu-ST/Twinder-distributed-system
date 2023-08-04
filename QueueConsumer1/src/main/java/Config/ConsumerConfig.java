@@ -17,7 +17,7 @@ public class ConsumerConfig {
    *
    * AWS Host: "50.112.70.179"
    */
-  public static final String QUEUE_HOST = "50.112.70.179";
+  public static final String QUEUE_HOST = "localhost";
 
   /**
    * RabbitMQ Port
@@ -57,7 +57,7 @@ public class ConsumerConfig {
   /**
    * DynamoDB table name
    */
-  public static final String DYNAMO_TABLE_NAME = "SwipeData";
+    public static final String DYNAMO_TABLE_NAME = "SwipeData";
 
   /**
    * Primary Key field name

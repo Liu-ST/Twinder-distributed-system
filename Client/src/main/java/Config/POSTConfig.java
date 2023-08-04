@@ -13,7 +13,7 @@ public final class POSTConfig {
 
   public static final String LOCAL_BASE_URL = "http://localhost:8080/TwinderServer";
 
-  public static final String URL = REMOTE_BASE_URL;
+  public static final String URL = LOCAL_BASE_URL;
 
   /**
    * How many request the client should send to server

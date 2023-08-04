@@ -2,31 +2,27 @@ package SwipeQueue;
 
 import Config.ConsumerConfig;
 import Data.Swipe;
+import Data.SwipeDataMap;
 import Data.UserSwipeData;
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.DeliverCallback;
 import java.io.IOException;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentMap;
 
 public class ConsumerThread implements Runnable {
 
   private Channel chan;
-  private BlockingQueue<Integer> data;
-  private ConcurrentMap<Integer, UserSwipeData> dataMap;
 
   /**
    * Constructs a new consumer thread to handle messages
    *
    * @param conn a Connection object represents the connection to the queue
    */
-  public ConsumerThread(Connection conn, BlockingQueue<Integer> data, ConcurrentMap<Integer, UserSwipeData> dataMap) {
+  public ConsumerThread(Connection conn) {
     try {
       this.chan = conn.createChannel();
-      this.data = data;
-      this.dataMap = dataMap;
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -42,22 +38,8 @@ public class ConsumerThread implements Runnable {
       //Deserialize message to object
       Swipe swipeInfo = new Gson().fromJson(message, Swipe.class);
 
-      //Updating data
-      int swiperId = swipeInfo.getSwiper();
-      UserSwipeData swipeData = dataMap.getOrDefault(swiperId, new UserSwipeData(swiperId));
-      String swipeType = swipeInfo.getSwipeType();
-      if(swipeType.equals("left")){
-        swipeData.incLeftSwipe();
-      } else {
-        //Update potential match and increment right swipe count
-        swipeData.incRightSwipe();
-        int swipeeId = swipeInfo.getSwipee();
-        swipeData.addPotentialMatch(swipeeId);
-      }
-      dataMap.putIfAbsent(swiperId, swipeData);
-
-      //Put swipe data to queue to update DynamoDB
-      data.offer(swiperId);
+      //Put swipe into dataMap
+      SwipeDataMap.getInstance().putData(swipeInfo);
 
       //Acknowledge the message after performing computation
       chan.basicAck(delivery.getEnvelope().getDeliveryTag(), false);

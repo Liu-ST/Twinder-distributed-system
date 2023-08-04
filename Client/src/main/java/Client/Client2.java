@@ -63,17 +63,17 @@ public class Client2 {
     }
 
     //Start the get thread
-    GETRequest getRequest = new GETRequest(httpClient);
-    Thread t = new Thread(getRequest);
-    t.start();
+//    GETRequest getRequest = new GETRequest(httpClient);
+//    Thread t = new Thread(getRequest);
+//    t.start();
 
     //Wait for all threads to finish execution, then terminate the GET thread too
     try {
       latch.await();
       System.out.println("POST done!");
       writeThread.join();
-      getRequest.stop();
-      t.join(100);
+//      getRequest.stop();
+//      t.join(100);
       System.out.println("GET done!");
     } catch (InterruptedException e) {
       e.printStackTrace();
@@ -109,15 +109,15 @@ public class Client2 {
     System.out.println(output.getOuput());
 
     //Print output for GET requests
-    String getOutput = new StringBuilder()
-        .append("GET Request result:").append(System.lineSeparator())
-        .append("Min response time: ")
-        .append(getRequest.getMinLatency()).append(" milliseconds").append(System.lineSeparator())
-        .append("Max response time: ")
-        .append(getRequest.getMaxLatency()).append(" milliseconds").append(System.lineSeparator())
-        .append("Average response time: ")
-        .append(getRequest.getAverageLatency()).append(" milliseconds").append(System.lineSeparator())
-        .toString();
-    System.out.println(getOutput);
+//    String getOutput = new StringBuilder()
+//        .append("GET Request result:").append(System.lineSeparator())
+//        .append("Min response time: ")
+//        .append(getRequest.getMinLatency()).append(" milliseconds").append(System.lineSeparator())
+//        .append("Max response time: ")
+//        .append(getRequest.getMaxLatency()).append(" milliseconds").append(System.lineSeparator())
+//        .append("Average response time: ")
+//        .append(getRequest.getAverageLatency()).append(" milliseconds").append(System.lineSeparator())
+//        .toString();
+//    System.out.println(getOutput);
   }
 }
