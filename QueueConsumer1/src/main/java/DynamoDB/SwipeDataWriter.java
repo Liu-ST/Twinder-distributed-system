@@ -85,7 +85,7 @@ public class SwipeDataWriter implements Runnable {
       while (iter.hasNext()) {
         Collection<TransactWriteItem> actions = new ArrayList<>();
         //Making sure only 100 update request max is sent per transaction
-        for (int i = 0; i < 100 && iter.hasNext(); i++) {
+        for (int i = 0; i < ConsumerConfig.NUM_REQ_PER_TRANSACTION && iter.hasNext(); i++) {
           int swiperId = iter.next();
 
           UserSwipeData updateData = dataMapSnapshot.get(swiperId);

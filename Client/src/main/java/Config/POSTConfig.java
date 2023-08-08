@@ -18,7 +18,7 @@ public final class POSTConfig {
   /**
    * How many request the client should send to server
    */
-  public static final int REQUEST_NUM = 500000;
+  public static final int REQUEST_NUM = 100;
 
   /**
    * Number of threads the client will use
